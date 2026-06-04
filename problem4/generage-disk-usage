@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for homedir in /home/*/; do
+    [ -d "$homedir" ] || continue
+    user=$(basename "$homedir")
+    size=$(du -sm "$homedir" 2>/dev/null | cut -f1)
+    echo "$user $size"
+done
+
+root_size=$(du -sm /root 2>/dev/null | cut -f1)
+echo "root $root_size"

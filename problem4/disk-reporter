@@ -1,36 +1,23 @@
 #!/bin/env bash
 
-# HINT: You can test the result of this script using the following command:
-# printf "alice 1200\nbob 450\ncharlie 2800\n" | ./disk-reporter
-
-# Each input line has: username size_MB (separated by a space)
-
 total=0
 highest_user=""
 highest_size=0
 over_limit=0
 
 while IFS= read -r line; do
-    # Step 1: Split the line into username and size.
-    #   Use: read -r username size <<< "$line"
-    #   Example: "alice 1200" -> username="alice", size=1200
+    read -r username size <<< "$line"
 
-    # Step 2: Add size to total.
-    #   Use: (( total += size ))
+    (( total += size ))
 
-    # Step 3: Check if this user has the highest usage so far.
-    #   Use: if (( size > highest_size )); then
-    #            highest_size=$size
-    #            highest_user=$username
-    #        fi
+    if (( size > highest_size )); then
+        highest_size=$size
+        highest_user=$username
+    fi
 
-    # Step 4: Count users whose size is greater than 1000.
-    #   Use: if (( size > 1000 )); then
-    #            (( over_limit++ ))
-    #        fi
-
-    # TODO: Replace this line with your implementation (Steps 1-4)
-    echo "TODO"
+    if (( size > 1000 )); then
+        (( over_limit++ ))
+    fi
 done
 
 echo "Total usage: $total MB"
