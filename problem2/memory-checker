@@ -10,9 +10,11 @@ read -r used_mb
 
 # Step 2: Calculate free MB.
 #   Use bash arithmetic: free_mb=$(( total_mb - used_mb ))
+free_mb=$(( total_mb - used_mb ))
 
 # Step 3: Calculate usage percentage (integer division).
 #   Use: usage=$(( used_mb * 100 / total_mb ))
+usage=$(( used_mb * 100 / total_mb ))
 
 # Step 4: Determine status based on usage percentage.
 #   Use an if/elif/else statement:
@@ -22,12 +24,20 @@ read -r used_mb
 #         status="Warning"
 #     else
 #         status="Normal"
-#     fi
+if (( usage >= 90 )); then
+    status="Critical"
+elif (( usage >= 70 )); then
+    status="Warning"
+else
+    status="Normal"
+fi    
 
 # Step 5: Print the result.
 #   echo "Free: $free_mb MB"
 #   echo "Usage: $usage%"
 #   echo "Status: $status"
 
-# TODO: Replace this line with your implementation
-echo "TODO"
+echo "Free: $free_mb MB"
+echo "Usage: $usage%"
+echo "Status: $status"
+
