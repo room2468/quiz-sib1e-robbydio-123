@@ -1,22 +1,9 @@
 #!/bin/env bash
 
-# HINT: You can test the result of this script using the following command:
-# echo "budi santoso" | ./formatter
-
-# Step 1: Read the full name and split it into two variables at once.
-#   Use: read -r first_name last_name
 read -r first_name last_name
 
-# Step 2: Convert last_name to ALL CAPS.
-#   Use bash parameter expansion: ${variable^^}
-#   Example: name="santoso" -> ${name^^} -> "SANTOSO"
+last_upper=${last_name^^}
+first_title=${first_name,,}
+first_title=${first_title^}
 
-# Step 3: Capitalize only the first letter of first_name (Title Case).
-#   First lowercase everything with ${variable,,}, then capitalize with ${variable^}
-#   Example: name="BUDI" -> ${name,,} -> "budi" -> ${name^} -> "Budi"
-
-# Step 4: Print the result in the format: "LASTNAME, Firstname"
-#   Use: echo "$last_upper, $first_title"
-
-# TODO: Replace this line with your implementation
-echo "TODO"
+echo "$last_upper, $first_title"
